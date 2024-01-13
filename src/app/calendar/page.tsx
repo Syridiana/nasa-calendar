@@ -1,8 +1,5 @@
 import styles from "./page.module.css";
 import { fetchMonth } from "../../utils/fetchMonth";
-import { useEffect, useState } from "react";
-import { PhotoDate } from "../../utils/APITypes/APIResponseType";
-import Image from "next/image";
 import Calendar from "@/components/Calendar/Calendar";
 
 export default async function MyCalendar() {

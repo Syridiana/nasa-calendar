@@ -1,41 +1,24 @@
 "use client";
 
 import styles from "./styles.module.css";
-import { useEffect, useState, useRef } from "react";
-import placeholder from "../../public/placeholder.png";
-
-import Image from "next/image";
-import Link from "next/link";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import Day from "../Day/Day";
+import { PhotoDate } from "@/utils/APITypes/APIResponseType";
+import { useRef } from "react";
 
-export default function Calendar({ data }) {
+export default function Calendar({ data }: { data: PhotoDate[] }) {
   const dateValues = data[0].date.split("-");
-  const firstDay = new Date(dateValues[0], dateValues[1] - 1, dateValues[2]);
+  const firstDay = new Date(
+    parseInt(dateValues[0]),
+    parseInt(dateValues[1]) - 1,
+    parseInt(dateValues[2])
+  );
   const emptySpaces = firstDay.getDay();
   const container = useRef();
   const element = useRef();
 
   const { contextSafe } = useGSAP({ scope: container });
-
-  const handleMouseEnter = contextSafe((e) => {
-    console.log("enter");
-    const containerRef = container.current.getBoundingClientRect();
-    const elementRef = element.current.getBoundingClientRect();
-
-    console.log(element.current);
-    gsap.to(".ball", {
-      duration: 0.5,
-      x: e.pageX - containerRef.left - elementRef.width / 2,
-      y: e.pageY - containerRef.top - elementRef.width / 2,
-      scale: 1,
-    });
-  });
-
-  const handleMouseLeave = contextSafe((e) => {
-    console.log("leave");
-  });
 
   return (
     <div className={styles.calendarWrapper}>

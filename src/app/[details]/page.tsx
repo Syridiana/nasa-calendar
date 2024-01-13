@@ -2,47 +2,45 @@
 
 import { fetchDatePhoto } from "@/utils/fetchDatePhoto";
 import Image from "next/image";
-import { useParams, useSearchParams } from "next/navigation";
+import { useParams } from "next/navigation";
 import { useEffect, useState, useRef } from "react";
-import styles from "./page.module.css";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
 const ListNamePage = () => {
   const { details } = useParams();
   const [image, setImage] = useState(null);
-  const [isLoading, setLoading] = useState(true);
-  const [isShown, setIsShown] = useState(false);
-  const container = useRef();
-  const element = useRef();
+  const container = useRef<HTMLDivElement>(null);
+  const element = useRef<HTMLDivElement>(null);
 
   const { contextSafe } = useGSAP({ scope: container });
 
   useEffect(() => {
     fetchDatePhoto(details as string).then((res) => {
       setImage(res);
-      setLoading(false);
     });
   }, []);
 
-  const handleMouseEnter = contextSafe((e) => {
-    const containerRef = container.current.getBoundingClientRect();
-    const elementRef = element.current.getBoundingClientRect();
-    gsap.to(".info", {
-      duration: 0.4,
-      x: e.pageX - elementRef.width / 2,
-      y: e.pageY - elementRef.height * 2,
-      opacity: 1,
-    });
-  });
+  const handleMouseEnter = contextSafe((e: MouseEvent) => {
+    if (element.current !== undefined && element.current !== null) {
+      const elementRef = element.current.getBoundingClientRect();
+      gsap.to(".info", {
+        duration: 0.4,
+        x: e.pageX - elementRef.width / 2,
+        y: e.pageY - elementRef.height * 2,
+        opacity: 1,
+      });
+    }
+  }) as React.MouseEventHandler<HTMLDivElement>;
 
-  const handleMouseLeave = contextSafe((e) => {
+  const handleMouseLeave = contextSafe((e: MouseEvent) => {
     e.stopPropagation();
     gsap.to(".info", {
       duration: 0.4,
       opacity: 0,
     });
-  });
+  }) as React.MouseEventHandler<HTMLDivElement>;
+
   return (
     <div>
       {image ? (

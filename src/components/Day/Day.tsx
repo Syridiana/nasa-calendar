@@ -1,21 +1,21 @@
 "use client";
 
 import styles from "./styles.module.css";
-import { useEffect, useState, useRef } from "react";
-import placeholder from "../../public/placeholder.png";
+import { useRef } from "react";
 
 import Image from "next/image";
 import Link from "next/link";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import { PhotoDate } from "@/utils/APITypes/APIResponseType";
 
-export default function Day({ image }) {
+export default function Day({ image }: { image: PhotoDate }) {
   const container = useRef();
   const element = useRef();
 
   const { contextSafe } = useGSAP({ scope: container });
 
-  const handleMouseEnter = contextSafe((e) => {
+  const handleMouseEnter = contextSafe((e: MouseEvent) => {
     const containerRef = container.current.getBoundingClientRect();
     const elementRef = element.current.getBoundingClientRect();
     gsap.to(".ball", {
@@ -26,7 +26,7 @@ export default function Day({ image }) {
     });
   });
 
-  const handleMouseLeave = contextSafe((e) => {
+  const handleMouseLeave = contextSafe((e: MouseEvent) => {
     e.stopPropagation();
     gsap.to(".ball", {
       duration: 0.4,
@@ -34,7 +34,7 @@ export default function Day({ image }) {
     });
   });
 
-  const handleMouseDown = contextSafe((e) => {
+  const handleMouseDown = contextSafe((e: MouseEvent) => {
     e.stopPropagation();
     gsap.to(".ball", {
       duration: 0.4,
