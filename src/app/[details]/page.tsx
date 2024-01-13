@@ -19,7 +19,7 @@ const ListNamePage = () => {
   const { contextSafe } = useGSAP({ scope: container });
 
   useEffect(() => {
-    fetchDatePhoto(details).then((res) => {
+    fetchDatePhoto(details as string).then((res) => {
       setImage(res);
       setLoading(false);
     });
