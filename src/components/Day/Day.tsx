@@ -1,0 +1,104 @@
+"use client";
+
+import styles from "./styles.module.css";
+import { useEffect, useState, useRef } from "react";
+import placeholder from "../../public/placeholder.png";
+
+import Image from "next/image";
+import Link from "next/link";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+
+export default function Day({ image }) {
+  const container = useRef();
+  const element = useRef();
+
+  const { contextSafe } = useGSAP({ scope: container });
+
+  const handleMouseEnter = contextSafe((e) => {
+    const containerRef = container.current.getBoundingClientRect();
+    const elementRef = element.current.getBoundingClientRect();
+    gsap.to(".ball", {
+      duration: 0.4,
+      x: e.pageX - containerRef.left - elementRef.width / 2,
+      y: e.pageY - containerRef.top - elementRef.height / 2,
+      scale: 1,
+    });
+  });
+
+  const handleMouseLeave = contextSafe((e) => {
+    e.stopPropagation();
+    gsap.to(".ball", {
+      duration: 0.4,
+      scale: 0,
+    });
+  });
+
+  const handleMouseDown = contextSafe((e) => {
+    e.stopPropagation();
+    gsap.to(".ball", {
+      duration: 0.4,
+      scale: 3,
+    });
+  });
+
+  return (
+    <Link
+      key={image.date}
+      image={image}
+      href={`/${image.date}`}
+      style={{ textDecoration: "none" }}
+    >
+      <div className={styles.day} ref={container}>
+        {image.hdurl ? (
+          <Image
+            src={image.hdurl}
+            width={95}
+            height={70}
+            alt={image.title}
+            priority={true}
+            quality={70}
+            className={styles.dailyImages}
+          />
+        ) : (
+          <Image
+            src="/placeholder.jpg"
+            width={95}
+            height={70}
+            alt={image.title}
+          />
+        )}
+        <div
+          style={{
+            backgroundColor: "#DD002A",
+            width: "100px",
+            height: "100px",
+            position: "absolute",
+            top: "0",
+            left: "0",
+            borderRadius: "350px",
+            transformOrigin: "center center",
+            transform: "scale(0)",
+            mixBlendMode: "hard-light",
+          }}
+          ref={element}
+          className="ball"
+        ></div>
+        <h6 className={styles.date}>{image.date.split("-")[2]}</h6>
+        <div
+          onMouseMove={handleMouseEnter}
+          onMouseOut={handleMouseLeave}
+          onMouseDown={handleMouseDown}
+          style={{
+            width: "100%",
+            height: "100%",
+            position: "absolute",
+            top: "0",
+            left: "0",
+            cursor: "pointer",
+          }}
+        ></div>
+      </div>
+    </Link>
+  );
+}

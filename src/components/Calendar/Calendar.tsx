@@ -1,15 +1,41 @@
 "use client";
 
 import styles from "./styles.module.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import placeholder from "../../public/placeholder.png";
 
 import Image from "next/image";
+import Link from "next/link";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import Day from "../Day/Day";
 
 export default function Calendar({ data }) {
   const dateValues = data[0].date.split("-");
   const firstDay = new Date(dateValues[0], dateValues[1] - 1, dateValues[2]);
   const emptySpaces = firstDay.getDay();
+  const container = useRef();
+  const element = useRef();
+
+  const { contextSafe } = useGSAP({ scope: container });
+
+  const handleMouseEnter = contextSafe((e) => {
+    console.log("enter");
+    const containerRef = container.current.getBoundingClientRect();
+    const elementRef = element.current.getBoundingClientRect();
+
+    console.log(element.current);
+    gsap.to(".ball", {
+      duration: 0.5,
+      x: e.pageX - containerRef.left - elementRef.width / 2,
+      y: e.pageY - containerRef.top - elementRef.width / 2,
+      scale: 1,
+    });
+  });
+
+  const handleMouseLeave = contextSafe((e) => {
+    console.log("leave");
+  });
 
   return (
     <div className={styles.calendarWrapper}>
@@ -27,23 +53,7 @@ export default function Calendar({ data }) {
         <h1>No Images Found</h1>
       ) : (
         data.map((image) => {
-          return (
-            <div className={styles.day} key={image.date}>
-              {image.hdurl ? (
-                <Image
-                  src={image.hdurl}
-                  width={95}
-                  height={70}
-                  alt={image.title}
-                  priority={true}
-                  quality={70}
-                  className={styles.dailyImages}
-                />
-              ) : (
-                <Image src="/" width={100} height={80} alt={image.title} />
-              )}
-            </div>
-          );
+          return <Day image={image} key={image.date} />;
         })
       )}
     </div>

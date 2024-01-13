@@ -8,6 +8,12 @@ export async function fetchMonth(dateReq: Date) {
   const res = await fetch(
     `https://api.nasa.gov/planetary/apod?api_key=STCWRHa2nM2InefjBHsHBfBG54gQG28VpObUqp0M&start_date=${year}-${month}-01&end_date=${year}-${month}-${lastDay}`
   );
+
+  if (!res.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error("Failed to fetch data");
+  }
+
   const data = await res.json();
 
   // Pass data to the page via props

@@ -1,0 +1,39 @@
+.landingWrapper {
+  grid-template-columns: [first] 10% [line3] auto [col4-start];
+  display: grid;
+}
+
+.logoWrapper {
+  width: 70%;
+  height: 100%;
+}
+
+.main {
+  margin-top: 3%;
+}
+
+.subtitle {
+  font-weight: 300;
+  font-size: 1.45em;
+  line-height: 0.8em;
+  margin: 0;
+}
+
+.month {
+  text-transform: capitalize;
+  font-weight: 400;
+  font-size: 1.5em;
+  text-align: center;
+  margin-top: 0;
+}
+
+.hoverStyles {
+  background-color: rgba(0, 0, 0, 0.8);
+  width: 60%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 5%;
+  height: 88%;
+  color: white;
+}
