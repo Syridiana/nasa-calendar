@@ -12,9 +12,6 @@ const nextConfig = {
   compiler: {
     styledComponents: true,
   },
-  env: {
-    API_KEY: process.env.API_KEY,
-  },
 };
 
 module.exports = nextConfig;
