@@ -10,21 +10,28 @@ import gsap from "gsap";
 import { PhotoDate } from "@/utils/APITypes/APIResponseType";
 
 export default function Day({ image }: { image: PhotoDate }) {
-  const container = useRef();
-  const element = useRef();
+  const container = useRef<HTMLDivElement>(null);
+  const element = useRef<HTMLDivElement>(null);
 
   const { contextSafe } = useGSAP({ scope: container });
 
   const handleMouseEnter = contextSafe((e: MouseEvent) => {
-    const containerRef = container.current.getBoundingClientRect();
-    const elementRef = element.current.getBoundingClientRect();
-    gsap.to(".ball", {
-      duration: 0.4,
-      x: e.pageX - containerRef.left - elementRef.width / 2,
-      y: e.pageY - containerRef.top - elementRef.height / 2,
-      scale: 1,
-    });
-  });
+    if (
+      container.current !== undefined &&
+      container.current !== null &&
+      element.current !== undefined &&
+      element.current !== null
+    ) {
+      const containerRef = container.current.getBoundingClientRect();
+      const elementRef = element.current.getBoundingClientRect();
+      gsap.to(".ball", {
+        duration: 0.4,
+        x: e.pageX - containerRef.left - elementRef.width / 2,
+        y: e.pageY - containerRef.top - elementRef.height / 2,
+        scale: 1,
+      });
+    }
+  }) as React.MouseEventHandler<HTMLDivElement>;
 
   const handleMouseLeave = contextSafe((e: MouseEvent) => {
     e.stopPropagation();
@@ -32,7 +39,7 @@ export default function Day({ image }: { image: PhotoDate }) {
       duration: 0.4,
       scale: 0,
     });
-  });
+  }) as React.MouseEventHandler<HTMLDivElement>;
 
   const handleMouseDown = contextSafe((e: MouseEvent) => {
     e.stopPropagation();
@@ -40,12 +47,11 @@ export default function Day({ image }: { image: PhotoDate }) {
       duration: 0.4,
       scale: 3,
     });
-  });
+  }) as React.MouseEventHandler<HTMLDivElement>;
 
   return (
     <Link
       key={image.date}
-      image={image}
       href={`/${image.date}`}
       style={{ textDecoration: "none" }}
     >

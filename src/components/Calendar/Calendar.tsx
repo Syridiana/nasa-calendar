@@ -1,11 +1,9 @@
 "use client";
 
 import styles from "./styles.module.css";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
+
 import Day from "../Day/Day";
 import { PhotoDate } from "@/utils/APITypes/APIResponseType";
-import { useRef } from "react";
 
 export default function Calendar({ data }: { data: PhotoDate[] }) {
   const dateValues = data[0].date.split("-");
@@ -15,10 +13,6 @@ export default function Calendar({ data }: { data: PhotoDate[] }) {
     parseInt(dateValues[2])
   );
   const emptySpaces = firstDay.getDay();
-  const container = useRef();
-  const element = useRef();
-
-  const { contextSafe } = useGSAP({ scope: container });
 
   return (
     <div className={styles.calendarWrapper}>
