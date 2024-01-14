@@ -1,13 +1,14 @@
 "use client";
 
-import { fetchDatePhoto } from "@/utils/fetchDatePhoto";
+import styles from "./page.module.css";
+
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import { useEffect, useState, useRef, CSSProperties } from "react";
+import { fetchDatePhoto } from "@/utils/fetchDatePhoto";
+import ClipLoader from "react-spinners/ClipLoader";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import styles from "./page.module.css";
-import ClipLoader from "react-spinners/ClipLoader";
 
 const override: CSSProperties = {
   display: "block",

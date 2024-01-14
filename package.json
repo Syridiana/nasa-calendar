@@ -10,14 +10,11 @@
   },
   "dependencies": {
     "@gsap/react": "^2.0.2",
-    "@nextui-org/react": "^2.2.9",
-    "framer-motion": "^10.18.0",
     "gsap": "^3.12.4",
     "next": "14.0.4",
     "react": "^18",
     "react-dom": "^18",
-    "react-spinners": "^0.13.8",
-    "styled-components": "^6.1.8"
+    "react-spinners": "^0.13.8"
   },
   "devDependencies": {
     "@types/node": "^20",

@@ -1,5 +1,6 @@
-import { ReactElement } from "react";
 import styles from "./page.module.css";
+
+import { ReactElement } from "react";
 import Image from "next/image";
 
 const CalendarLayout = ({ children }: { children: ReactElement }) => {
