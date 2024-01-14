@@ -1,4 +1,4 @@
-export interface PhotoDate {
+export interface PhotoDateI {
   date: string;
   copyright: string;
   explanation: string;

@@ -17,6 +17,9 @@ const CalendarLayout = ({ children }: { children: ReactElement }) => {
               alt="NASA logo"
             />
             <h2 className={styles.subtitle}>Calendar</h2>
+            <h3 className={styles.secondSubtitle}>
+              Astronomy Picture of the Day
+            </h3>
           </div>
           <div>{children}</div>
         </div>

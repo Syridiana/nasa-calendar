@@ -1,20 +1,13 @@
-import styles from "./page.module.css";
 import { fetchMonth } from "../../utils/fetchMonth";
 import Calendar from "@/components/Calendar/Calendar";
 
 export default async function MyCalendar() {
   const date = new Date(2023, 1, 1);
   const data = await fetchMonth(date);
-  const monthLong = date.toLocaleString("default", { month: "long" });
 
   return (
     <div>
-      <div>
-        <h4 className={styles.month}>
-          {monthLong} {date.getFullYear()}
-        </h4>
-        <Calendar data={data} />
-      </div>
+      <Calendar data={data} />
     </div>
   );
 }

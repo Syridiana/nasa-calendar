@@ -2,14 +2,13 @@
 
 import styles from "./styles.module.css";
 import { useRef } from "react";
-
 import Image from "next/image";
 import Link from "next/link";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { PhotoDate } from "@/utils/APITypes/APIResponseType";
+import { PhotoDateI } from "@/app/interfaces/PhotoDateI";
 
-export default function Day({ image }: { image: PhotoDate }) {
+export default function Day({ image }: { image: PhotoDateI }) {
   const container = useRef<HTMLDivElement>(null);
   const element = useRef<HTMLDivElement>(null);
 
@@ -60,7 +59,7 @@ export default function Day({ image }: { image: PhotoDate }) {
           <Image
             src={image.hdurl}
             width={95}
-            height={70}
+            height={90}
             alt={image.title}
             priority={true}
             quality={70}
@@ -74,35 +73,13 @@ export default function Day({ image }: { image: PhotoDate }) {
             alt={image.title}
           />
         )}
-        <div
-          style={{
-            backgroundColor: "#DD002A",
-            width: "100px",
-            height: "100px",
-            position: "absolute",
-            top: "0",
-            left: "0",
-            borderRadius: "350px",
-            transformOrigin: "center center",
-            transform: "scale(0)",
-            mixBlendMode: "hard-light",
-          }}
-          ref={element}
-          className="ball"
-        ></div>
+        <div ref={element} className={`ball ${styles.hoverBall}`}></div>
         <h6 className={styles.date}>{image.date.split("-")[2]}</h6>
         <div
           onMouseMove={handleMouseEnter}
           onMouseOut={handleMouseLeave}
           onMouseDown={handleMouseDown}
-          style={{
-            width: "100%",
-            height: "100%",
-            position: "absolute",
-            top: "0",
-            left: "0",
-            cursor: "pointer",
-          }}
+          className={styles.mouseLayer}
         ></div>
       </div>
     </Link>
