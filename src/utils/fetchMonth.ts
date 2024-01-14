@@ -6,7 +6,7 @@ export async function fetchMonth(dateReq: Date) {
 
   // Fetch data from external API
   const res = await fetch(
-    `https://api.nasa.gov/planetary/apod?api_key=STCWRHa2nM2InefjBHsHBfBG54gQG28VpObUqp0M&start_date=${year}-${month}-01&end_date=${year}-${month}-${lastDay}`
+    `https://api.nasa.gov/planetary/apod?api_key=${process.env.API_KEY}&start_date=${year}-${month}-01&end_date=${year}-${month}-${lastDay}`
   );
 
   if (!res.ok) {

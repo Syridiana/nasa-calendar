@@ -6,13 +6,23 @@ import Image from "next/image";
 import Link from "next/link";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { PhotoDateI } from "@/app/interfaces/PhotoDateI";
+import { PhotoDateI } from "@/interfaces/PhotoDateI";
 
 export default function Day({ image }: { image: PhotoDateI }) {
   const container = useRef<HTMLDivElement>(null);
   const element = useRef<HTMLDivElement>(null);
 
   const { contextSafe } = useGSAP({ scope: container });
+
+  useGSAP(() => {
+    gsap.to(".day", {
+      duration: 0.5,
+      y: -40,
+      stagger: 0.02,
+      opacity: 1,
+      ease: "power1.out",
+    });
+  });
 
   const handleMouseEnter = contextSafe((e: MouseEvent) => {
     if (
@@ -54,7 +64,7 @@ export default function Day({ image }: { image: PhotoDateI }) {
       href={`/${image.date}`}
       style={{ textDecoration: "none" }}
     >
-      <div className={styles.day} ref={container}>
+      <div className={`${styles.day} day`} ref={container}>
         {image.hdurl ? (
           <Image
             src={image.hdurl}

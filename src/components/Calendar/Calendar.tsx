@@ -3,7 +3,7 @@
 import styles from "./styles.module.css";
 
 import Day from "../Day/Day";
-import { PhotoDateI } from "@/app/interfaces/PhotoDateI";
+import { PhotoDateI } from "@/interfaces/PhotoDateI";
 
 export default function Calendar({ data }: { data: PhotoDateI[] }) {
   const dateValues = data[0].date.split("-");

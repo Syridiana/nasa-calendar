@@ -58,6 +58,8 @@
   width: 100%;
   position: relative;
   overflow: hidden;
+  opacity: 0;
+  top: 40px;
 }
 
 .dailyImages {

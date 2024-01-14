@@ -6,10 +6,13 @@ import { useParams } from "next/navigation";
 import { useEffect, useState, useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import styles from "./page.module.css";
+import { Spinner } from "@nextui-org/react";
 
 const ListNamePage = () => {
   const { details } = useParams();
   const [image, setImage] = useState(null);
+  const [loading, setLoading] = useState(true);
   const container = useRef<HTMLDivElement>(null);
   const element = useRef<HTMLDivElement>(null);
 
@@ -19,14 +22,14 @@ const ListNamePage = () => {
     fetchDatePhoto(details as string).then((res) => {
       setImage(res);
     });
-  }, []);
+  }, [details]);
 
   const handleMouseEnter = contextSafe((e: MouseEvent) => {
     if (element.current !== undefined && element.current !== null) {
       const elementRef = element.current.getBoundingClientRect();
       gsap.to(".info", {
         duration: 0.4,
-        x: e.pageX - elementRef.width / 2,
+        x: e.pageX - elementRef.width / 2.5,
         y: e.pageY - elementRef.height * 2,
         opacity: 1,
       });
@@ -41,17 +44,17 @@ const ListNamePage = () => {
     });
   }) as React.MouseEventHandler<HTMLDivElement>;
 
+  const loadedHandler = () => {
+    console.log(10);
+    setLoading(false);
+  };
+
   return (
     <div>
       {image ? (
         <div>
           <div
-            style={{
-              width: "auto",
-              height: "90vh",
-              position: "relative",
-              overflow: "hidden",
-            }}
+            className={styles.container}
             onMouseMove={handleMouseEnter}
             onMouseOut={handleMouseLeave}
             ref={container}
@@ -63,26 +66,29 @@ const ListNamePage = () => {
               style={{ width: "auto", height: "100%", maxWidth: "100%" }}
               src={image[`hdurl`]}
               alt={image[`title`]}
+              placeholder="blur"
+              blurDataURL={"/placeholder.png"}
+              priority
+              onLoad={loadedHandler}
             />
-            <div
-              className="info"
-              ref={element}
-              style={{
-                backgroundColor: "rgba(0, 0, 0, 0.8)",
-                padding: "10%",
-                color: "white",
-              }}
-            >
-              <div>Date: {details} </div>
+            <div className={`info ${styles.info}`} ref={element}>
+              <div>
+                <strong>Date:</strong> {details}
+              </div>
               <p>{image[`explanation`]}</p>
-              <p>{image[`title`]}</p>
-              <p>{image[`copyright`]}</p>
+              <p>
+                <strong>Title:</strong> {image[`title`]}
+              </p>
+              <p>
+                <strong>Author:</strong> {image[`copyright`]}
+              </p>
             </div>
           </div>
         </div>
       ) : (
-        <p>Loading...</p>
+        <Spinner />
       )}
+      {loading ? <Spinner /> : null}
     </div>
   );
 };
