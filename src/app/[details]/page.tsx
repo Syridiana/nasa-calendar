@@ -57,6 +57,18 @@ const ListNamePage = () => {
 
   return (
     <div>
+      {loading ? (
+        <div className={styles.loader}>
+          <ClipLoader
+            color={"#DD002A"}
+            loading={loading}
+            cssOverride={override}
+            size={80}
+            aria-label="Loading Spinner"
+            data-testid="loader"
+          />
+        </div>
+      ) : null}
       {image ? (
         <div>
           <div
@@ -69,7 +81,7 @@ const ListNamePage = () => {
               width={0}
               height={0}
               sizes="100vh"
-              style={{ width: "auto", height: "100%" }}
+              className={styles.myImage}
               src={image[`hdurl`]}
               alt={image[`title`]}
               priority
@@ -88,18 +100,6 @@ const ListNamePage = () => {
               </p>
             </div>
           </div>
-        </div>
-      ) : null}
-      {loading ? (
-        <div className={styles.loader}>
-          <ClipLoader
-            color={"#DD002A"}
-            loading={loading}
-            cssOverride={override}
-            size={80}
-            aria-label="Loading Spinner"
-            data-testid="loader"
-          />
         </div>
       ) : null}
     </div>
