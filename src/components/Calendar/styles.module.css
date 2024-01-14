@@ -37,7 +37,7 @@
 
 .calendarBox {
   background-color: white;
-  filter: drop-shadow(0px 0px 40px rgba(0, 0, 0, 0.2));
+  filter: drop-shadow(0px 0px 20px rgba(0, 0, 0, 0.2));
   max-width: 760px;
   padding-top: 2%;
   margin: auto;
@@ -63,13 +63,13 @@
   .month {
     text-align: left;
     padding: 0;
+    margin-bottom: 7%;
   }
 
   .calendarWrapper {
     width: auto;
     margin: 0;
     padding: 0;
-    grid-template-columns: 1fr;
   }
 
   .calendarBox {
@@ -91,6 +91,9 @@
 @media (max-width: 768px) {
   .calendarWrapper {
     grid-template-columns: repeat(4, 1fr);
+  }
+  .emptyDay {
+    display: none;
   }
 
   .weekday {

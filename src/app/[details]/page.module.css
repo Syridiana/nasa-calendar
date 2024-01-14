@@ -74,4 +74,12 @@
 }
 
 @media (max-width: 768px) {
+  .loader {
+    width: 100vw;
+    height: 100vh;
+  }
+
+  .main {
+    margin-top: 7%;
+  }
 }

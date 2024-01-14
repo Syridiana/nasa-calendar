@@ -29,7 +29,7 @@ export default function Calendar({ data }: { data: PhotoDateI[] }) {
         <div className={styles.weekday}>Fri</div>
         <div className={styles.weekday}>Sat</div>
         {[...Array(emptySpaces)].map((x, i) => (
-          <div className="emptyDay" key={i}></div>
+          <div className={styles.emptyDay} key={i}></div>
         ))}
         {!data.length ? (
           <h1>No Images Found</h1>
