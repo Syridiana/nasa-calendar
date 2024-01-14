@@ -51,7 +51,6 @@ const ListNamePage = () => {
   }) as React.MouseEventHandler<HTMLDivElement>;
 
   const loadedHandler = () => {
-    console.log(10);
     setLoading(false);
   };
 
