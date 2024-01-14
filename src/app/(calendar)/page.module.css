@@ -35,7 +35,7 @@
   }
 
   .logoWrapper {
-    width: 130px;
+    width: 260px;
     margin-bottom: 10%;
   }
 
@@ -46,5 +46,11 @@
   .secondSubtitle {
     font-size: 1.5em;
     line-height: 1em;
+  }
+}
+
+@media (max-width: 768px) {
+  .emptyDay {
+    display: none;
   }
 }

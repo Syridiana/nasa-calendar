@@ -3,11 +3,17 @@
 import { fetchDatePhoto } from "@/utils/fetchDatePhoto";
 import Image from "next/image";
 import { useParams } from "next/navigation";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, CSSProperties } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import styles from "./page.module.css";
-import { Spinner } from "@nextui-org/react";
+import ClipLoader from "react-spinners/ClipLoader";
+
+const override: CSSProperties = {
+  display: "block",
+  margin: "0 auto",
+  borderColor: "red",
+};
 
 const ListNamePage = () => {
   const { details } = useParams();
@@ -63,11 +69,9 @@ const ListNamePage = () => {
               width={0}
               height={0}
               sizes="100vh"
-              style={{ width: "auto", height: "100%", maxWidth: "100%" }}
+              style={{ width: "auto", height: "100%" }}
               src={image[`hdurl`]}
               alt={image[`title`]}
-              placeholder="blur"
-              blurDataURL={"/placeholder.png"}
               priority
               onLoad={loadedHandler}
             />
@@ -85,10 +89,19 @@ const ListNamePage = () => {
             </div>
           </div>
         </div>
-      ) : (
-        <Spinner />
-      )}
-      {loading ? <Spinner /> : null}
+      ) : null}
+      {loading ? (
+        <div className={styles.loader}>
+          <ClipLoader
+            color={"#DD002A"}
+            loading={loading}
+            cssOverride={override}
+            size={80}
+            aria-label="Loading Spinner"
+            data-testid="loader"
+          />
+        </div>
+      ) : null}
     </div>
   );
 };

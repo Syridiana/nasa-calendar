@@ -1,5 +1,5 @@
 .landingWrapper {
-  grid-template-columns: [first] 10% [line3] auto [col4-start];
+  grid-template-columns: 15% auto;
   display: grid;
 }
 
@@ -39,9 +39,39 @@
   color: white;
 }
 
+.loader {
+  width: 90vw;
+  height: 90vh;
+  justify-content: center;
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  align-items: center;
+}
+
 .container {
   width: auto;
   height: 90vh;
   position: relative;
   overflow: hidden;
+}
+
+@media (max-width: 1100px) {
+  .landingWrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .logoWrapper {
+    width: 40%;
+    height: 30%;
+  }
+
+  .backArrow {
+    margin-top: 5vh;
+    margin-bottom: 2vh;
+  }
+}
+
+@media (max-width: 768px) {
 }

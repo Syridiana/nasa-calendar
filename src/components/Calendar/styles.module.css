@@ -62,14 +62,19 @@
 
   .month {
     text-align: left;
+    padding: 0;
   }
 
   .calendarWrapper {
-    width: 100%;
+    width: auto;
+    margin: 0;
+    padding: 0;
+    grid-template-columns: 1fr;
   }
 
   .calendarBox {
     background-color: transparent;
+    padding: 0;
   }
 
   .prevArrow,
@@ -80,5 +85,15 @@
   .day {
     height: 7vw;
     width: 8vw;
+  }
+}
+
+@media (max-width: 768px) {
+  .calendarWrapper {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .weekday {
+    display: none;
   }
 }
